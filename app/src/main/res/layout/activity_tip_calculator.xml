@@ -29,7 +29,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.4"
-            android:text="Price" />
+            android:text="@string/price" />
 
         <EditText
             android:id="@+id/etTax"
@@ -55,7 +55,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.4"
-            android:text="Tax" />
+            android:text="@string/tax" />
 
         <EditText
             android:id="@+id/etPrice"
@@ -81,7 +81,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.4"
-            android:text="Tip %" />
+            android:text="@string/tip" />
 
         <EditText
             android:id="@+id/etTip"
