@@ -2,7 +2,9 @@ package in.maxwell.m2024a;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.SeekBar;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -27,6 +29,9 @@ public class ColorMixer extends AppCompatActivity implements SeekBar.OnSeekBarCh
 
     TextView tvColor;
 
+    Switch swColorCode;
+    TextView tvColorCode;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +49,34 @@ public class ColorMixer extends AppCompatActivity implements SeekBar.OnSeekBarCh
 
         tvColor = findViewById(R.id.tvColor);
 
+        swColorCode = findViewById(R.id.swShowColorCode);
+        tvColorCode = findViewById(R.id.tvColorCode);
+
+        setColorCode();
+
+        swColorCode.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                tvColorCode.setVisibility(View.VISIBLE);
+            } else {
+                tvColorCode.setVisibility(View.GONE);
+            }
+
+            setColorCode();
+
+        });
+
         sbRed.setOnSeekBarChangeListener(ColorMixer.this);
         sbGreen.setOnSeekBarChangeListener(ColorMixer.this);
         sbBlue.setOnSeekBarChangeListener(ColorMixer.this);
+    }
+
+    private void setColorCode() {
+
+        tvColorCode.setText("#"
+                + Integer.toHexString(redPart)
+                + Integer.toHexString(greenPart)
+                + Integer.toHexString(bluePart));
+
     }
 
     @Override
@@ -69,6 +99,8 @@ public class ColorMixer extends AppCompatActivity implements SeekBar.OnSeekBarCh
 
         int mixedColor = Color.rgb(redPart, greenPart, bluePart);
         tvColor.setBackgroundColor(mixedColor);
+
+        setColorCode();
 
         // 136 181 178
 

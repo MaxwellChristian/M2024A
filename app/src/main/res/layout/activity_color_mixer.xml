@@ -45,7 +45,7 @@
                 android:layout_weight="1"
                 android:max="255"
                 android:min="0"
-                android:progress="100" />
+                android:progress="0" />
 
             <TextView
                 android:id="@+id/tvRedValue"
@@ -77,7 +77,7 @@
                 android:layout_weight="1"
                 android:max="255"
                 android:min="0"
-                android:progress="100" />
+                android:progress="0" />
 
             <TextView
                 android:id="@+id/tvGreenValue"
@@ -109,7 +109,7 @@
                 android:layout_weight="1"
                 android:max="255"
                 android:min="0"
-                android:progress="100" />
+                android:progress="0" />
 
             <TextView
                 android:id="@+id/tvBlueValue"
@@ -135,7 +135,7 @@
             android:layout_marginEnd="8dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.7"
-            android:visibility="visible"
+            android:visibility="gone"
             android:text="#57AD8F" />
 
         <Switch
