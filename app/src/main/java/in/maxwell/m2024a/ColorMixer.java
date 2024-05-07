@@ -1,5 +1,6 @@
 package in.maxwell.m2024a;
 
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -38,6 +39,9 @@ public class ColorMixer extends AppCompatActivity implements SeekBar.OnSeekBarCh
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        fetchSavedColor();
+
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_color_mixer);
 
@@ -72,6 +76,17 @@ public class ColorMixer extends AppCompatActivity implements SeekBar.OnSeekBarCh
         sbBlue.setOnSeekBarChangeListener(ColorMixer.this);
     }
 
+    private void fetchSavedColor() {
+        SharedPreferences sharedPreferences =
+                getSharedPreferences("spColors", MODE_PRIVATE);
+
+        redPart = sharedPreferences.getInt("red", 0);
+        greenPart = sharedPreferences.getInt("green", 0);
+        bluePart = sharedPreferences.getInt("blue", 0);
+
+        Log.i("Color Mixer", "Color Retrieved (From Shared Preferences) : R = " + redPart + " G = " + greenPart + " B = " + bluePart );
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -85,6 +100,7 @@ public class ColorMixer extends AppCompatActivity implements SeekBar.OnSeekBarCh
 
         if (item.getItemId() == R.id.miSaveColor) {
             Log.i("Color Mixer", "Save Color Clicked");
+            saveColor();
         }
 
         if (item.getItemId() == R.id.miRemoveColors) {
@@ -96,6 +112,22 @@ public class ColorMixer extends AppCompatActivity implements SeekBar.OnSeekBarCh
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void saveColor() {
+
+        SharedPreferences sharedPreferences =
+                getSharedPreferences("spColors", MODE_PRIVATE);
+
+        sharedPreferences
+                .edit()
+                .putInt("red", redPart)
+                .putInt("green", greenPart)
+                .putInt("blue", bluePart)
+                .apply();
+
+        Log.i("Color Mixer", "Color Saved (In Shared Preferences)");
+
     }
 
     private void setColorCode() {
