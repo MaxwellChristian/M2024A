@@ -1,4 +1,4 @@
-package in.maxwell.m2024a.student_demo;
+package in.maxwell.m2024a.student_using_database;
 
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -31,7 +31,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
 
     @NonNull
     @Override
-    public StudentAdapter.StudentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public StudentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.record_student, parent, false);
 
@@ -39,7 +39,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
     }
 
     @Override
-    public void onBindViewHolder(@NonNull StudentAdapter.StudentViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull StudentViewHolder holder, int position) {
 
         holder.tvStudentID.setText(alStudents.get(position).getStudentID());
         holder.tvStudentName.setText(String.format("%s %s", alStudents.get(position).getFirstName(), alStudents.get(position).getLastName()));

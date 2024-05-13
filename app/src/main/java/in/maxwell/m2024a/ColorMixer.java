@@ -16,6 +16,8 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import in.maxwell.m2024a.student_demo.Student;
+
 public class ColorMixer extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener {
 
     SeekBar sbRed;
@@ -41,6 +43,10 @@ public class ColorMixer extends AppCompatActivity implements SeekBar.OnSeekBarCh
         super.onCreate(savedInstanceState);
 
         fetchSavedColor();
+
+        Bundle bundle = getIntent().getExtras();
+        Student student = (Student) bundle.get("selected_student");
+        Log.d("ColorMixer", "Received Student  = " + student.toString());
 
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_color_mixer);
@@ -74,6 +80,10 @@ public class ColorMixer extends AppCompatActivity implements SeekBar.OnSeekBarCh
         sbRed.setOnSeekBarChangeListener(ColorMixer.this);
         sbGreen.setOnSeekBarChangeListener(ColorMixer.this);
         sbBlue.setOnSeekBarChangeListener(ColorMixer.this);
+
+        sbRed.setProgress(redPart);
+        sbGreen.setProgress(greenPart);
+        sbBlue.setProgress(bluePart);
     }
 
     private void fetchSavedColor() {

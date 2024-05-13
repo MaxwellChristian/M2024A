@@ -1,4 +1,4 @@
-package in.maxwell.m2024a.student_demo;
+package in.maxwell.m2024a.student_using_database;
 
 import java.io.Serializable;
 

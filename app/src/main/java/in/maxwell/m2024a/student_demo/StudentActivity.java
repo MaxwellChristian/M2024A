@@ -1,6 +1,8 @@
 package in.maxwell.m2024a.student_demo;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import in.maxwell.m2024a.ColorMixer;
 import in.maxwell.m2024a.R;
 
 public class StudentActivity extends AppCompatActivity {
@@ -38,5 +41,16 @@ public class StudentActivity extends AppCompatActivity {
 
         studentAdapter = new StudentAdapter(alStudents);
         rvStudent.setAdapter(studentAdapter);
+
+        studentAdapter.setOnStudentClickListener((position, student) -> {
+            Log.d("Student", student.toString());
+
+            Intent colorIntent =  new Intent(StudentActivity.this, ColorMixer.class);
+
+            colorIntent.putExtra("selected_student", student);
+
+            startActivity(colorIntent);
+
+        });
     }
 }
