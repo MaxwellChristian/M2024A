@@ -3,10 +3,13 @@ package in.maxwell.m2024a.student_using_database;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -17,6 +20,7 @@ import in.maxwell.m2024a.R;
 public class StudentActivity extends AppCompatActivity {
 
     RecyclerView rvStudent;
+    FloatingActionButton fabAddStudent;
     ArrayList<Student> alStudents;
     private StudentAdapter studentAdapter;
 
@@ -27,6 +31,9 @@ public class StudentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_student);
 
         rvStudent = findViewById(R.id.rvStudent);
+        fabAddStudent = findViewById(R.id.fabAddStudent);
+
+        fabAddStudent.setOnClickListener( v -> addStudentRecord() );
 
         LinearLayoutManager layoutManager =  new LinearLayoutManager(StudentActivity.this);
         rvStudent.setLayoutManager(layoutManager);
@@ -40,9 +47,9 @@ public class StudentActivity extends AppCompatActivity {
             DBHelper dbHelper = new DBHelper(StudentActivity.this);
 
             // add some testing records to database
-            dbHelper.addStudent( new Student("S1", "Maxwell-", "Christian", 1, "Regina"));
-            dbHelper.addStudent( new Student("S2", "Alex-", "Wang", 1, "Regina"));
-            dbHelper.addStudent( new Student("S3", "Christa-", "Wunsch", 0, "Regina"));
+//            dbHelper.addStudent( new Student("S1", "Maxwell-", "Christian", 1, "Regina"));
+//            dbHelper.addStudent( new Student("S2", "Alex-", "Wang", 1, "Regina"));
+//            dbHelper.addStudent( new Student("S3", "Christa-", "Wunsch", 0, "Regina"));
 
             alStudents = dbHelper.getAllStudents();
 
@@ -62,6 +69,13 @@ public class StudentActivity extends AppCompatActivity {
         } catch (Exception e) {
             Log.e("StudentActivity", Objects.requireNonNull(e.getMessage()));
         }
+
+    }
+
+    private void addStudentRecord() {
+
+        Intent addStudentIntent =  new Intent(StudentActivity.this, AddStudentActivity.class);
+        startActivity(addStudentIntent);
 
     }
 }
