@@ -1,15 +1,20 @@
 package in.maxwell.m2024a;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -39,9 +44,18 @@ public class IntentExamples extends AppCompatActivity {
         });
 
         btnCall.setOnClickListener(v -> {
-            Intent intent = new Intent(Intent.ACTION_CALL);
-            intent.setData(Uri.parse("tel:" + tvContactNumber.getText().toString()));
-            startActivity(intent);
+
+            String permission = Manifest.permission.CALL_PHONE;
+            boolean granted = ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED;
+
+            if (!granted) {
+                requestPermissions(new String[]{permission}, 1234);
+            } else {
+                Intent intent = new Intent(Intent.ACTION_CALL);
+                intent.setData(Uri.parse("tel:" + tvContactNumber.getText().toString()));
+                startActivity(intent);
+            }
+
         });
 
         btnAlert.setOnClickListener(v -> {
@@ -67,6 +81,21 @@ public class IntentExamples extends AppCompatActivity {
 
             alertDialog.show();
         });
+
+        String url = "www.linked.com";
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            Log.d("Permissions", "onRequestPermissionsResult: Permission Granted");
+
+        } else {
+            Log.d("Permissions", "onRequestPermissionsResult: Permission NOT Granted");
+        }
 
     }
 }
