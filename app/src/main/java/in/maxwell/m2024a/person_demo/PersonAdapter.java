@@ -1,5 +1,7 @@
 package in.maxwell.m2024a.person_demo;
 
+import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,10 +50,21 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonView
             }
         });
 
+        holder.itemView.setLongClickable(true);
+
+        holder.itemView.setOnLongClickListener(v -> {
+            Log.d("Person Adapter", "onPersonLongClick: " + person);
+            return true;
+        });
+
     }
 
     public interface OnPersonClickListener {
         void onPersonClick(int position, Person person);
+    }
+
+    public interface OnPersonLongClickListener {
+        void onPersonLongClick(int position, Person person);
     }
 
     @Override
@@ -59,7 +72,7 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonView
         return alPersonList.size();
     }
 
-    public void setOnPersonClickListener(OnPersonClickListener onPersonClickListener){
+    public void setOnPersonClickListener(OnPersonClickListener onPersonClickListener) {
         this.onPersonClickListener = onPersonClickListener;
     }
 
@@ -74,7 +87,6 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonView
             personImage = itemView.findViewById(R.id.ivPerson);
 
         }
-
     }
 
 

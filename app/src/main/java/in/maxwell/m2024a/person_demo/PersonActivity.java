@@ -2,7 +2,11 @@ package in.maxwell.m2024a.person_demo;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.MenuItem;
+import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import in.maxwell.m2024a.R;
+import in.maxwell.m2024a.student_demo.StudentAdapter;
 
 public class PersonActivity extends AppCompatActivity {
 
@@ -44,5 +49,23 @@ public class PersonActivity extends AppCompatActivity {
             Log.d("PersonActivity", "Person: " + person.getFirstName() + " " + person.getLastName());
         });
 
+        registerForContextMenu(rvPersonList);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+        getMenuInflater().inflate(R.menu.menu_context_operations, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+
+        Log.d("PersonActivity", "onContextItemSelected");
+        RecyclerView.Adapter<StudentAdapter.StudentViewHolder> selectedView = ((RecyclerView.Adapter<StudentAdapter.StudentViewHolder>) item.getMenuInfo());
+
+
+        return super.onContextItemSelected(item);
     }
 }
