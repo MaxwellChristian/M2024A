@@ -15,6 +15,24 @@ import in.maxwell.m2024a.R;
 
 public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentViewHolder> {
     private final ArrayList<Student> alStudents;
+    Student selectedStudent;
+    int selectedPosition;
+
+    public Student getSelectedStudent() {
+        return selectedStudent;
+    }
+
+    public void setSelectedStudent(Student selectedStudent) {
+        this.selectedStudent = selectedStudent;
+    }
+
+    public int getSelectedPosition() {
+        return selectedPosition;
+    }
+
+    public void setSelectedPosition(int selectedPosition) {
+        this.selectedPosition = selectedPosition;
+    }
 
     public interface OnStudentClickListener {
         void onStudentClick(int position, Student student);
@@ -56,6 +74,14 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
         // set/attach the click listener
         holder.itemView.setOnClickListener(view -> {
             onStudentClickListener.onStudentClick(position, alStudents.get(position));
+        });
+
+        holder.itemView.setOnLongClickListener(view -> {
+
+            selectedStudent = alStudents.get(position);
+            selectedPosition = position;
+
+            return false;
         });
     }
 

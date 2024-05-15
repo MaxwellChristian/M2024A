@@ -16,7 +16,8 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import in.maxwell.m2024a.student_demo.Student;
+import in.maxwell.m2024a.student_using_database.Student;
+
 
 public class ColorMixer extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener {
 

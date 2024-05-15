@@ -5,8 +5,10 @@ import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,6 +24,8 @@ public class PersonActivity extends AppCompatActivity {
     RecyclerView rvPersonList;
     ArrayList<Person> alPersonList;
     PersonAdapter personAdapter;
+    private Person selectedPerson;
+    private int selectedPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,10 +66,40 @@ public class PersonActivity extends AppCompatActivity {
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
 
-        Log.d("PersonActivity", "onContextItemSelected");
-        RecyclerView.Adapter<StudentAdapter.StudentViewHolder> selectedView = ((RecyclerView.Adapter<StudentAdapter.StudentViewHolder>) item.getMenuInfo());
+        selectedPerson = personAdapter.getSelectedPerson();
+        selectedPosition = personAdapter.getSelectedPosition();
+        Log.d("PersonActivity", "onContextItemSelected: Person selected: " + selectedPerson);
 
+        if (item.getItemId() == R.id.cmiEdit) {
+            // navigate to the activity which can edit the record
+            return true;
+        }
+
+        if( item.getItemId() == R.id.cmiRemove ){
+            // show the confirm dialog box
+            showConfirmationDialog();
+        }
 
         return super.onContextItemSelected(item);
+    }
+
+    private void showConfirmationDialog() {
+        AlertDialog alertDialog = new AlertDialog.Builder(PersonActivity.this).create();
+        alertDialog.setTitle("Confirmation");
+        alertDialog.setMessage("Are you sure you want to remove this record?");
+
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Yes", (dialog, which) -> {
+            // remove the record on confirmation
+
+            Log.d("PersonActivity", "showConfirmationDialog: " + "Before refresh the list");
+            // refresh the list
+            if(personAdapter.removePerson(selectedPerson)) {
+                Toast.makeText(PersonActivity.this, "Record removed successfully", Toast.LENGTH_SHORT).show();
+            }
+        } );
+
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No", (dialog, which) -> {} );
+
+        alertDialog.show();
     }
 }

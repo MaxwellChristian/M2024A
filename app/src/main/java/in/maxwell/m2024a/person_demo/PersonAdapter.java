@@ -1,7 +1,6 @@
 package in.maxwell.m2024a.person_demo;
 
 import android.util.Log;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +18,26 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonView
 
     private final ArrayList<Person> alPersonList;
     private OnPersonClickListener onPersonClickListener;
+
+    public Person getSelectedPerson() {
+        return selectedPerson;
+    }
+
+    public void setSelectedPerson(Person selectedPerson) {
+        this.selectedPerson = selectedPerson;
+    }
+
+    Person selectedPerson;
+
+    public int getSelectedPosition() {
+        return selectedPosition;
+    }
+
+    public void setSelectedPosition(int selectedPosition) {
+        this.selectedPosition = selectedPosition;
+    }
+
+    int selectedPosition;
 
     public PersonAdapter(ArrayList<Person> alPersonList) {
         this.alPersonList = alPersonList;
@@ -50,21 +69,31 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.PersonView
             }
         });
 
-        holder.itemView.setLongClickable(true);
-
         holder.itemView.setOnLongClickListener(v -> {
             Log.d("Person Adapter", "onPersonLongClick: " + person);
-            return true;
+            selectedPerson = person;
+            selectedPosition = holder.getAdapterPosition();
+
+            // the return MUST be FALSE
+            // (or else the context menu will not be shown)
+            return false;
         });
 
     }
 
-    public interface OnPersonClickListener {
-        void onPersonClick(int position, Person person);
+    public boolean removePerson(Person selectedPerson) {
+        int position = alPersonList.indexOf(selectedPerson);
+        if (position != -1) {
+            alPersonList.remove(position);
+        }
+
+         notifyItemRemoved(position);
+
+        return position != -1;
     }
 
-    public interface OnPersonLongClickListener {
-        void onPersonLongClick(int position, Person person);
+    public interface OnPersonClickListener {
+        void onPersonClick(int position, Person person);
     }
 
     @Override

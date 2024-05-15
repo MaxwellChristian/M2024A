@@ -25,6 +25,7 @@ public class IntentExamples extends AppCompatActivity {
     Button btnCall;
     Button btnDial;
     Button btnAlert;
+    Button btnShowLinkedIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class IntentExamples extends AppCompatActivity {
         btnCall = findViewById(R.id.btnCall);
         btnDial = findViewById(R.id.btnDial);
         btnAlert = findViewById(R.id.btnShowDialog);
+        btnShowLinkedIn = findViewById(R.id.btnLinkedIn);
 
         btnDial.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_DIAL);
@@ -82,7 +84,14 @@ public class IntentExamples extends AppCompatActivity {
             alertDialog.show();
         });
 
-        String url = "www.linked.com";
+        btnShowLinkedIn.setOnClickListener(v -> {
+            String url = "http://www.linked.com";
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(url));
+            startActivity(intent);
+        });
+
+
 
     }
 

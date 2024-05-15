@@ -3,8 +3,11 @@ package in.maxwell.m2024a.student_using_database;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,6 +37,8 @@ public class StudentActivity extends AppCompatActivity {
         fabAddStudent = findViewById(R.id.fabAddStudent);
 
         fabAddStudent.setOnClickListener( v -> addStudentRecord() );
+
+        registerForContextMenu(rvStudent);
 
         LinearLayoutManager layoutManager =  new LinearLayoutManager(StudentActivity.this);
         rvStudent.setLayoutManager(layoutManager);
@@ -69,6 +74,30 @@ public class StudentActivity extends AppCompatActivity {
         } catch (Exception e) {
             Log.e("StudentActivity", Objects.requireNonNull(e.getMessage()));
         }
+
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+        getMenuInflater().inflate(R.menu.student_record_operations, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+
+        if (item.getItemId() == R.id.cmiStudentEdit) {
+            // edit the selected student
+            Log.d("StudentActivity", "In Edit: " + studentAdapter.getSelectedStudent());
+        }
+
+        if (item.getItemId() == R.id.cmiStudentRemove) {
+            // remove the selected student
+            Log.d("StudentActivity", "In Remove: " + studentAdapter.getSelectedStudent());
+        }
+
+        return super.onContextItemSelected(item);
 
     }
 
