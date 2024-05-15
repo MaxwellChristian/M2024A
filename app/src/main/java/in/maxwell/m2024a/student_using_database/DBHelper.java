@@ -97,4 +97,28 @@ public class DBHelper extends SQLiteOpenHelper {
         // insert the record into the database
         return db.insert("tblStudents", null, values);
     }
+
+    public boolean removeStudent(Student student) {
+
+        String query = "DELETE FROM tblStudents WHERE studentID = " + student.getStudentID();
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL(query);
+
+        return true;
+    }
+
+    public void updateStudent(Student student) {
+
+        String query = "UPDATE tblStudents SET "
+                + "studentFirstName = '" + student.getFirstName()
+                + "', studentLastName = '" + student.getLastName()
+                + "', studentGender = " + student.getGender()
+                + ", studentCity = '" + student.getCity() + "'"
+                + " WHERE studentID = " + student.getStudentID();
+
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL(query);
+
+    }
+
 }

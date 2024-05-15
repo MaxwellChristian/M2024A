@@ -1,5 +1,6 @@
 package in.maxwell.m2024a.person_demo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -7,7 +8,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -72,7 +76,8 @@ public class PersonActivity extends AppCompatActivity {
 
         if (item.getItemId() == R.id.cmiEdit) {
             // navigate to the activity which can edit the record
-            return true;
+            editPerson();
+            return false;
         }
 
         if( item.getItemId() == R.id.cmiRemove ){
@@ -81,6 +86,16 @@ public class PersonActivity extends AppCompatActivity {
         }
 
         return super.onContextItemSelected(item);
+    }
+
+    private void editPerson() {
+
+        Intent intent = new Intent(PersonActivity.this, EditPersonActivity.class);
+        intent.putExtra("person_to_edit", personAdapter.getSelectedPerson());
+
+        startActivity(intent);
+        finish();
+
     }
 
     private void showConfirmationDialog() {
@@ -101,5 +116,12 @@ public class PersonActivity extends AppCompatActivity {
         alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "No", (dialog, which) -> {} );
 
         alertDialog.show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        Log.d("PersonActivity", "onActivityResult: " + requestCode + " " + resultCode);
     }
 }

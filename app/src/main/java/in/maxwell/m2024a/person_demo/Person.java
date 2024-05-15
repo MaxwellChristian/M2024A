@@ -2,7 +2,9 @@ package in.maxwell.m2024a.person_demo;
 
 import androidx.annotation.NonNull;
 
-public class Person {
+import java.io.Serializable;
+
+public class Person implements Serializable {
 
     enum Gender {
         MALE, FEMALE
