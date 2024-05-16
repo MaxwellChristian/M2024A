@@ -6,5 +6,6 @@
 
     <!--    keys for intent bundles-->
     <string name="key_amount" translatable="false">key_paid_amount</string>
+    <string name="title_activity_maps">MapsActivity</string>
 
 </resources>
