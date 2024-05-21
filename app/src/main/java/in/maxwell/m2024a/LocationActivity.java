@@ -11,6 +11,8 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.maps.MapView;
+
 import java.util.concurrent.atomic.AtomicReference;
 
 public class LocationActivity extends AppCompatActivity {
@@ -48,6 +50,8 @@ public class LocationActivity extends AppCompatActivity {
                     locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0F, location -> {
                         Log.d("LocationActivity", "onCreate: location (GPS): " + location);
                     });
+
+
 
                 }
 
