@@ -34,6 +34,10 @@ public class VideDemoActivity extends AppCompatActivity {
 //            Intent videoIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.saskpolytech.ca"));
 //            startActivity(videoIntent);
 
+//            Intent videoIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/maps/place/Saskatchewan+Polytechnic,+Regina+Campus/@50.4077084,-104.5819046,17z/data=!3m1!4b1!4m6!3m5!1s0x531ea0f2ce2cf2fb:0xde9358ab42a882b0!8m2!3d50.4077084!4d-104.5819046!16s%2Fg%2F1jlk05yx3?entry=ttu"));
+//            startActivity(videoIntent);
+
+
         });
 
 
