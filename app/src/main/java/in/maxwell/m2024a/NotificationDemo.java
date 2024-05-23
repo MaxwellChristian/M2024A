@@ -37,6 +37,10 @@ public class NotificationDemo extends AppCompatActivity {
     private void showNotification() {
 
         Intent nextIntent = new Intent(NotificationDemo.this, DateTimePicker.class);
+
+        nextIntent.putExtra("notificationTitle", "My App Notification");
+        nextIntent.putExtra("notificationText", "The test content for the custom notification");
+
         PendingIntent pendingIntent = PendingIntent.getActivity(NotificationDemo.this, 0, nextIntent, PendingIntent.FLAG_IMMUTABLE);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(NotificationDemo.this, MY_APP_NOTIFICATION_CHANNEL_ID);
