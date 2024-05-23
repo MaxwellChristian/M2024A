@@ -33,6 +33,9 @@ public class DateTimePicker extends AppCompatActivity {
         if( bundle != null ){
             notificationTitle = bundle.getString("notificationTitle");
             notificationText = bundle.getString("notificationText");
+
+            Log.d("DateTimePicker", "notificationTitle: " + notificationTitle);
+            Log.d("DateTimePicker", "notificationText: " + notificationText);
         }
 
         setContentView(R.layout.activity_date_time_picker);
@@ -41,7 +44,7 @@ public class DateTimePicker extends AppCompatActivity {
         btnShowTime = findViewById(R.id.btnShowTime);
 
         tvNotificationTitle = findViewById(R.id.tvNotificationTitle);
-        tvNotificationTitle = findViewById(R.id.tvNotificationText);
+        tvNotificationText = findViewById(R.id.tvNotificationText);
 
         if( notificationTitle != null ){
             tvNotificationTitle.setText(notificationTitle);
