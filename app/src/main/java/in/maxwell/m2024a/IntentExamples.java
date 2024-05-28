@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,8 @@ public class IntentExamples extends AppCompatActivity {
     Button btnDial;
     Button btnAlert;
     Button btnShowLinkedIn;
+
+    ImageView ivShowOnMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +94,45 @@ public class IntentExamples extends AppCompatActivity {
             startActivity(intent);
         });
 
+        ivShowOnMap = findViewById(R.id.ivShowOnMap);
+        ivShowOnMap.setOnClickListener(v -> {
+
+//            Uri.Builder builder = new Uri.Builder();
+//            builder.scheme("https")
+//                    .authority("www.google.com")
+//                    .appendPath("maps")
+//                    .appendPath("dir")
+//                    .appendPath("")
+//                    .appendQueryParameter("api", "1")
+//                    .appendQueryParameter("destination", 50.4254761 + "," + -104.610385);
+//            String url = builder.build().toString();
+//            Log.d("Directions", url);
+//            Intent i = new Intent(Intent.ACTION_VIEW);
+//            i.setData(Uri.parse(url));
+//            startActivity(i);
+
+            // display map for a particular coordinate with a zoom level and a custom label
+            Intent mapIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?z=17&q=50.4273269,-104.6142173( SLT )"));
+            // in the above code, 'z' signifies the zoom level (0-21, o for world view and 21 for buildings)
+            // int the above coe, 'q' signifies the search query
+            // in the above code, '( SLT )' is the custom label
+
+            // search for all restaurants
+//            Intent mapIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?z=15&q=restaurants"));
+
+            // search for a particular coordinate and label it (as MLT)
+//            Intent mapIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?z=15&q=50.4273269,-104.6142173(MLT)"));
+
+            // set the zoom level (0: world view, 21: buildings)
+//            Intent mapIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:50.4273269,-104.6142173?z=17"));
+
+            // Searches for 'Play Park' near given coordinates
+//            Intent mapIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:50.4273269,-104.6142173?q=Play+Park"));
+
+            mapIntent.setPackage("com.google.android.apps.maps");
+
+            startActivity(mapIntent);
+        });
 
 
     }

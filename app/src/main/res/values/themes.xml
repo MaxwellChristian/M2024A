@@ -2,4 +2,13 @@
 <resources>
 
     <style name="Theme.M2024A" parent="Theme.AppCompat.Light" />
+
+    <style name="Theme.M2024A.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.M2024A.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.M2024A.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

@@ -7,5 +7,8 @@
     <!--    keys for intent bundles-->
     <string name="key_amount" translatable="false">key_paid_amount</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <string name="title_activity_item_detail_host">ItemDetailHostActivity</string>
+    <string name="title_item_list">Items</string>
+    <string name="title_item_detail">Item Detail</string>
 
 </resources>
